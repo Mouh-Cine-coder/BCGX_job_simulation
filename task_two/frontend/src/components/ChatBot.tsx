@@ -3,13 +3,13 @@
 import axios from "axios";
 import { use, useState, Suspense, Component } from "react";
 import {
-    Combobox,
-    ComboboxContent,
-    ComboboxEmpty,
-    ComboboxInput,
-    ComboboxItem,
-    ComboboxList,
-} from "@/components/ui/combobox";
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -114,81 +114,67 @@ function ChatBot() {
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-4 text-xl text-slate-200">
                     <span className="text-slate-400 font-light">From</span>
 
-
-                    
-                    {/* FIX: use onSelect to update formData.company */}
-                    <Combobox
-                        items={companies}
-                       
+                    <Select
+                        onValueChange={(value) =>
+                            setFormData({ ...formData, company: value })
+                        }
                     >
-                        <ComboboxInput
+                        <SelectTrigger
                             className="
-                                bg-slate-800 border border-slate-600 hover:border-blue-500/70
-                                focus:border-blue-400 focus:ring-1 focus:ring-blue-400/30
-                                text-blue-300 placeholder:text-slate-500
-                                rounded-lg px-4 py-2 text-base font-medium
-                                transition-all duration-200 min-w-40
+                                w-40 bg-slate-800 border border-slate-600
+                                hover:border-blue-500/70 focus:ring-1 focus:ring-blue-400/30
+                                text-blue-300 rounded-lg px-4 py-2 text-base font-medium
+                                transition-all duration-200
                             "
-                            placeholder="Company ↓"
-                        />
-                        <ComboboxContent className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl shadow-black/60">
-                            <ComboboxEmpty className="text-slate-500 text-sm p-3">
-                                No companies found.
-                            </ComboboxEmpty>
-                            <ComboboxList className="p-1">
-                                {(item) => (
-                                    <ComboboxItem
-                                        key={item}
-                                        value={item}
-                                        className="text-slate-300 hover:bg-blue-500/10 hover:text-blue-300 rounded-lg px-3 py-2 text-sm cursor-pointer transition-colors"
+                        >
+                            <SelectValue placeholder="Company ↓" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl shadow-black/60">
+                            <SelectGroup>
+                                {companies.map((company) => (
+                                    <SelectItem
+                                        key={company}
+                                        value={company}
+                                        className="text-slate-300 hover:bg-blue-500/10 hover:text-blue-300 rounded-lg text-sm cursor-pointer transition-colors"
                                     >
-                                        {item}
-                                    </ComboboxItem>
-                                )}
-                            </ComboboxList>
-                        </ComboboxContent>
-                    </Combobox>
+                                        {company}
+                                    </SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
 
                     <span className="text-slate-600">,</span>
 
-                    {/* FIX: use onSelect instead of onChange to update formData.question */}
-                    <Combobox items={questions}>
-                        <ComboboxInput
+                    <Select
+                        onValueChange={(value) =>
+                            setFormData({ ...formData, question: value })
+                        }
+                    >
+                        <SelectTrigger
                             className="
-                                bg-slate-800 border border-slate-600 hover:border-blue-500/70
-                                focus:border-blue-400 focus:ring-1 focus:ring-blue-400/30
-                                text-blue-300 placeholder:text-slate-500
-                                rounded-lg px-4 py-2 text-base font-medium
-                                transition-all duration-200 min-w-72
+                                w-72 bg-slate-800 border border-slate-600
+                                hover:border-blue-500/70 focus:ring-1 focus:ring-blue-400/30
+                                text-blue-300 rounded-lg px-4 py-2 text-base font-medium
+                                transition-all duration-200
                             "
-                            placeholder="select a question ↓"
-                        />
-                        <ComboboxContent className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl shadow-black/60 max-w-sm">
-                            <ComboboxEmpty className="text-slate-500 text-sm p-3">
-                                No questions found.
-                            </ComboboxEmpty>
-                            <ComboboxList className="p-1">
-                                {(item) => (
-                                    <ComboboxItem
-                                        onSelect={(selectedValue) => {
-                                            setFormData({
-                                                ...formData,
-                                                question:
-                                                    selectedValue.currentTarget
-                                                        .textContent,
-                                            });
-                                            console.log(formData);
-                                        }}
-                                        key={item}
-                                        value={item}
-                                        className="text-slate-300 hover:bg-blue-500/10 hover:text-blue-300 rounded-lg px-3 py-2 text-sm cursor-pointer transition-colors"
+                        >
+                            <SelectValue placeholder="Select a question ↓" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl shadow-black/60 max-w-sm">
+                            <SelectGroup>
+                                {questions.map((question) => (
+                                    <SelectItem
+                                        key={question}
+                                        value={question}
+                                        className="text-slate-300 hover:bg-blue-500/10 hover:text-blue-300 rounded-lg text-sm cursor-pointer transition-colors"
                                     >
-                                        {item}
-                                    </ComboboxItem>
-                                )}
-                            </ComboboxList>
-                        </ComboboxContent>
-                    </Combobox>
+                                        {question}
+                                    </SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
 
                     <span className="text-slate-400 font-light">?</span>
                 </div>
