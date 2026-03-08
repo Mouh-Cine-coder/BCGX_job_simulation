@@ -25,9 +25,9 @@ function App() {
 
         {/* Divider line */}
         <div className="flex items-center justify-center gap-3 pt-2">
-          <div className="h-px w-16 bg-gradient-to-r from-transparent to-blue-500/50" />
+          <div className="h-px w-16 bg-linear-to-r from-transparent to-blue-500/50" />
           <div className="w-1 h-1 rounded-full bg-blue-500/50" />
-          <div className="h-px w-16 bg-gradient-to-l from-transparent to-blue-500/50" />
+          <div className="h-px w-16 bg-linear-to-l from-transparent to-blue-500/50" />
         </div>
       </div>
 
