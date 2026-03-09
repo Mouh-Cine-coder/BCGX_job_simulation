@@ -180,7 +180,6 @@ function ChatBot() {
                 </div>
 
                 <div className="mt-8 flex justify-end">
-                    {/* FIX: type="button" prevents page reload when inside a form */}
                     <button
                         type="button"
                         onClick={handleSubmit}
