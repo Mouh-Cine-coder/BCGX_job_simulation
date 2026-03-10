@@ -26,17 +26,11 @@ app.add_middleware(
 
 @app.post("/")
 def chatbot(data: FormData):
-    # get the company name  either Apple, Microsoft, Tesla
-    # get the query (very specified ones)
-    print(data.company)
-    print(data.question)
     
     cb = ChatBot(data.company)
-    
-    print(cb.debugg())
     
     return {
         "company": data.company,
         "question": data.question,
-        "answer": "Your answer here"
+        "answer": cb.question(data.question)
     }

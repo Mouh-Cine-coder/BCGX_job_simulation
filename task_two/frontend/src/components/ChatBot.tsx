@@ -40,6 +40,7 @@ interface ApiResponse {
 
 const submitForm = (data: FormData): Promise<ApiResponse> => {
     console.log(data);
+
     return axios
         .post<ApiResponse>("http://127.0.0.1:8000/", data)
         .then((res) => res.data);
@@ -77,7 +78,7 @@ const FormResult = ({ promise }: { promise: Promise<ApiResponse> }) => {
                 Response — {data.company}
             </p>
             <p className="text-slate-400 text-sm italic">"{data.question}?"</p>
-            <p className="text-slate-200 text-base leading-relaxed">
+            <p className="text-slate-200 text-base leading-relaxed whitespace-pre-wrap">
                 {data.answer}
             </p>
         </div>
@@ -97,8 +98,6 @@ function ChatBot() {
 
     const handleSubmit = () => {
         if (!isReady) return;
-        console.log("[v0] Form submitted with data:", formData);
-
         setPromise(submitForm(formData));
     };
 
